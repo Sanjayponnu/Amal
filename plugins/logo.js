@@ -159,6 +159,16 @@ Asena.addCommand({pattern: 'logo', fromMe: false, desc: Lang.TXTTOIMG_DESC}, (as
 
     }));
 
+    Asena.addCommand({pattern: 'matrix ?(.*)', fromMe: false, dontAddCommandList: true}, (async (message, match) => {
+
+    if (match[1] === '') return await message.client.sendMessage(message.jid,NEED_WORD);
+
+    var webimage = await axios.get(`https://api.zeks.xyz/api/matrix?text=${match[1]}&APIKEY=HYLQkGwhDYquQut8eIOvxyzcXHR`, { responseType: 'arraybuffer' })
+
+    await message.client.sendMessage(message.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg, caption: '```Made by Amal```'})
+
+    }));
+
     Asena.addCommand({pattern: 'fabric ?(.*)', fromMe: false, dontAddCommandList: true}, (async (message, match) => {
 
     if (match[1] === '') return await message.client.sendMessage(message.jid,NEED_WORD);
